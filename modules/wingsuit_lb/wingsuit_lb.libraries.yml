@@ -1,4 +1,4 @@
-layout:
+core:
   version: VERSION
   css:
     component:
