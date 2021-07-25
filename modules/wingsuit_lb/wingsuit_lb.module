@@ -7,7 +7,7 @@ use Drupal\ui_patterns\Definition\PatternDefinition ;
  */
 function wingsuit_lb_page_attachments(array &$attachments) {
   if (gin_lb_is_layout_builder_route() && gin_lb_is_valid_theme()) {
-    $attachments['#attached']['library'][] = 'wingsuit_lb/layout';
+    $attachments['#attached']['library'][] = 'wingsuit_lb/core';
   }
 }
 
