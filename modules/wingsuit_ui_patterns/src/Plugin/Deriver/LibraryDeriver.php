@@ -16,7 +16,7 @@ use Drupal\Core\Extension\ThemeHandlerInterface;
 /**
  * Class LibraryDeriver.
  *
- * @package Drupal\ui_patterns_library\Deriver
+ * @package Drupal\wingsuit_ui_patterns\Deriver
  */
 class LibraryDeriver extends AbstractYamlPatternsDeriver {
 
@@ -202,7 +202,7 @@ class LibraryDeriver extends AbstractYamlPatternsDeriver {
    */
   protected function getDirectories() {
     $dist_path = $this->config->get('dist_path');
-    $directories['wingsuit_companion'] = $dist_path;
+    $directories['wingsuit'] = $dist_path;
     return $directories;
   }
 
