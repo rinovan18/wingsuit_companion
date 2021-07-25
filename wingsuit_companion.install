@@ -14,13 +14,22 @@ function wingsuit_companion_update_8001() {
   $config = $config_factory->get('wingsuit_companion.config');
   $dist_path = $config->get('dist_path');
 
-  $absolute_path = _wingsuit_canonicalize(\Drupal::service('theme_handler')->getTheme('wingsuit')->getPath(
+  $absolute_path = _wingsuit_companion_canonicalize(\Drupal::service('theme_handler')->getTheme('wingsuit')->getPath(
   ) . $dist_path);
 
   $config_factory->getEditable('wingsuit_companion.config')->set('dist_path', $absolute_path)->save();
 }
 
-function _wingsuit_canonicalize($path) {
+/**
+ * Canonicalize relative dist folder.
+ *
+ * @param $path
+ *   The relative dist path.
+ *
+ * @return string
+ *   The absolute path.
+ */
+function _wingsuit_companion_canonicalize($path) {
   $path = explode('/', $path);
   $keys = array_keys($path, '..');
 
@@ -31,4 +40,16 @@ function _wingsuit_canonicalize($path) {
   $path = implode('/', $path);
   $path = str_replace('./', '', $path);
   return $path;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * Set default dist_path to "themes/custom/wingsuit/dist/app-drupal"
+ */
+function wingsuit_companion_install() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('wingsuit_companion.config');
+  $config->set('dist_path', 'themes/custom/wingsuit/dist/app-drupal');
+  $config->save(TRUE);
 }

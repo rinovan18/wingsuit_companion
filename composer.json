@@ -24,6 +24,9 @@
     "drupal/ui_patterns_layout_builder": "^1.1",
     "drupal/ui_patterns_settings": "^2.0",
     "drupal/ui_patterns": "^1.1",
-    "drupal/ui_patterns_extends": "^1.0"
+    "drupal/ui_patterns_extends": "^1.0",
+    "drupal/field_group": "^3.0",
+    "drupal/gin_lb": "^1.0",
+    "drupal/layout_builder_browser": "^1.0"
   }
 }
