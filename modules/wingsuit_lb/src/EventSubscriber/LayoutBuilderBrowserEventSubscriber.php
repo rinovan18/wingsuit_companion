@@ -22,7 +22,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
     $route = $request->attributes->get('_route');
     if ($route == 'layout_builder.choose_section') {
       $build = $event->getControllerResult();
-      $build['#attached']['library'][] = 'wingsuit_layout/dialog';
+      $build['#attached']['library'][] = 'wingsuit_lb/core';
 
       if (($key = array_search('layout-selection', $build['layouts']['#attributes']['class'])) !== false) {
         unset($build['layouts']['#attributes']['class'][$key]);
@@ -34,7 +34,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
       $event->setControllerResult($build);
     }
     if ($route == 'layout_builder.choose_block') {
-      $build['#attached']['library'][] = 'wingsuit_layout/dialog';
+      $build['#attached']['library'][] = 'wingsuit_lb/core';
       $build = $event->getControllerResult();
       if (is_array($build) && !isset($build['add_block'])) {
         $build['block_categories']['#type'] = 'horizontal_tabs';

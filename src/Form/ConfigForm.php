@@ -25,7 +25,7 @@ class ConfigForm extends FormBase {
     $form['dist_path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Dist path'),
-      '#description' => $this->t('A local file system path to your themes dist directory.'),
+      '#description' => $this->t('A local file system path to your dist/app-drupal directory.'),
       '#maxlength' => 128,
       '#size' => 64,
       '#default_value' => $config->get('dist_path'),

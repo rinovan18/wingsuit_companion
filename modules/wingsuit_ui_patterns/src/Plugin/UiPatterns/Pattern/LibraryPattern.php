@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   id = "yaml",
  *   label = @Translation("Wingsuit Library Pattern"),
  *   description = @Translation("Pattern defined using a *.wingsuit.yml file."),
- *   deriver = "\Drupal\wingsuit_companion\Plugin\Deriver\LibraryDeriver"
+ *   deriver = "\Drupal\wingsuit_ui_patterns\Plugin\Deriver\LibraryDeriver"
  * )
  */
 class LibraryPattern extends PatternBase {
