@@ -2,7 +2,7 @@ div[data-off-canvas-main-canvas] {
   padding-right: 0 !important;
 }
 
-.glb-toolbar {
+.glb-toolbar:not(.glb-toolbar--extended) {
   width: 100% !important;
 }
 
