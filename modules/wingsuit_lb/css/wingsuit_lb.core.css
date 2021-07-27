@@ -1,11 +1,3 @@
-div[data-off-canvas-main-canvas] {
-  padding-right: 0 !important;
-}
-
-.glb-toolbar:not(.glb-toolbar--extended) {
-  width: 100% !important;
-}
-
 .ws-lb .glb-claro-details__wrapper,
 .ws-lb-container {
   display: grid;
