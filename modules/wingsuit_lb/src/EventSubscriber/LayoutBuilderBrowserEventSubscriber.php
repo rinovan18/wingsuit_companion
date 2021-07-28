@@ -56,6 +56,25 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
         $event->setControllerResult($build);
       }
     }
+    if ($route == 'section_library.choose_template_from_library') {
+      $build = $event->getControllerResult();
+      $build['#attached']['library'][] = 'wingsuit_lb/core';
+      $build['sections']['#attributes']['class'] = ['ws-lb', 'ws-lb-container'];
+      $build['sections']['#type'] = 'container';
+      unset($build['sections']['#theme']);
+      $build['sections']['items'] = $build['sections']['#links'];
+      foreach ($build['sections']['items'] as &$link) {
+        $link['#type'] = 'link';
+        $link['#title'] = $link['title'];
+        $link['#url'] = $link['url'];
+        $link['#attributes'] = $link['attributes'];
+        unset($link['url']);
+        unset($link['title']);
+        unset($link['attributes']);
+      }
+      $event->setControllerResult($build);
+
+    }
   }
 
   /**

@@ -21,7 +21,7 @@
   box-shadow: 4px 4px 10px var(--colorGinLayer2Background);
 }
 
-.ws-lb a > div{
+.ws-lb a > div, .ws-lb a .section-library-link-label {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -43,3 +43,7 @@
   transform: translate(-50%, -50%);
 }
 
+.ws-lb .ajax-progress-throbber {
+  position: absolute !important;
+  z-index: 10;
+}
