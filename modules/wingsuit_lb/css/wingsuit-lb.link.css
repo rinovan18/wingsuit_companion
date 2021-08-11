@@ -1,0 +1,35 @@
+.ws-lb-link {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56%;
+  border: 1px solid var(--colorGinTableBorder);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #F3F4F6;
+}
+
+.ws-lb-link:hover {
+  box-shadow: 4px 4px 10px var(--colorGinLayer2Background);
+}
+
+.ws-lb-link__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  background-color: #ffffff;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.ws-lb-link svg, .ws-lb-link img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
