@@ -1,0 +1,5 @@
+.layout-builder__region.flex > .layout-builder-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

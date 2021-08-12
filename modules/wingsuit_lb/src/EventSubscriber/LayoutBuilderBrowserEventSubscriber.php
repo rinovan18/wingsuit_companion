@@ -45,7 +45,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
       foreach ($add_sections['items']  as &$item) {
         $item['#title']['icon']['#theme'] = 'wingsuit_lb_icon';
         $item['#title']['label']['#attributes']['class'] = ['ws-lb-link__label'];
-        $item['#attributes']['class'] = ['ws-lb-link'];
+        $item['#attributes']['class'][] = 'ws-lb-link';
       }
       $request = $event->getRequest();
       /** @var \Drupal\layout_builder\Plugin\SectionStorage\OverridesSectionStorage $section_storage */

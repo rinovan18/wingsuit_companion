@@ -23,11 +23,6 @@ function wingsuit_lb_ui_patterns_layouts_display_settings_form_alter(
   $form['#type'] = 'container';
   $form['field_templates']['#type'] = 'hidden';
   $form['settings']['#type'] = 'container';
-  if ($definition->id() === 'section') {
-    $form['variant']['#title'] = t('Columns');
-    $form['settings']['display_header_region']['#weight'] = 10;
-    $form['settings']['width']['#weight'] = -10;
-  }
 }
 
 /**
