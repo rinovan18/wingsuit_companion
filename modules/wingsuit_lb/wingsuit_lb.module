@@ -2,6 +2,8 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ui_patterns\Definition\PatternDefinition;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_page_attachments().
@@ -33,11 +35,51 @@ function wingsuit_lb_form_alter(
   FormStateInterface $form_state,
   $form_id
 ) {
-  if ($form_id === 'node_landing_page_layout_builder_form') {
-    hide($form['actions']['submit']);
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (
+    $node instanceof NodeInterface &&
+    $form_id === 'node_' . $node->bundle() . '_layout_builder_form') {
+    $add_template_to_library_url = Url::fromRoute(
+      'section_library.add_template_to_library',
+      [
+        'section_storage_type' => 'overrides',
+        'section_storage' => $node->getEntityTypeId() . '.' . $node->id(),
+        'delta' => 1,
+      ],
+      [
+        'attributes' => [
+          'class' => [
+            'glb-button ws-lb-button',
+            'use-ajax',
+          ],
+          'data-dialog-type' => 'dialog',
+          'data-dialog-renderer' => 'off_canvas',
+        ],
+      ]
+    );
+    $form['actions']['add_to_library'] = [
+      '#type' => 'link',
+      '#weight' => 10,
+      '#url' => $add_template_to_library_url,
+      '#title' => ['#markup'=>'<div class="ws-lb-button__icon"></div>' . t('Add to library')],
+      '#access' => $add_template_to_library_url->access(),
+    ];
+
+    $form['actions']['submit']['#value'] = t(
+      'Save and Preview'
+    );
     $form['actions']['layout_builder_save_and_edit_layout']['#value'] = t(
       'Save'
     );
+  }
+  if (
+    in_array($form_id, [
+      'section_library_add_template_to_library',
+      'section_library_add_section_to_library'
+    ])) {
+    $form['#after_build'][] = 'gin_lb_after_build';
+    $form['#gin_lb_form'] = TRUE;
+    $form['#attributes']['class'][] = 'glb-form';
   }
 }
 
@@ -48,7 +90,7 @@ function wingsuit_lb_preprocess_wingsuit_lb_icon(&$variables) {
   $uri = $variables['uri'];
   $extension = pathinfo($uri, PATHINFO_EXTENSION);
   if ($extension === 'svg') {
-    if (substr($uri, 0,1) === '/') {#
+    if (substr($uri, 0, 1) === '/') {#
       $uri = substr($uri, 1);
     }
     if (file_exists($uri)) {
@@ -62,7 +104,6 @@ function wingsuit_lb_preprocess_wingsuit_lb_icon(&$variables) {
  */
 function wingsuit_lb_theme($existing, $type, $theme, $path) {
   return [
-
     'wingsuit_lb_icon' => [
       'variables' => [
         'uri' => NULL,

@@ -62,6 +62,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
         $section_storage,
         $delta
       );
+      $add_library['#access'] = count($add_library['items']) > 0;
       unset($build['layouts']);
       $build['layouts'] = [
         '#type' => 'container',
