@@ -44,6 +44,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
       $add_sections['items'] = $build['layouts']['#items'];
       foreach ($add_sections['items']  as &$item) {
         $item['#title']['icon']['#theme'] = 'wingsuit_lb_icon';
+        $item['#title']['icon']['#icon_type']  = 'section';
         $item['#title']['label']['#attributes']['class'] = ['ws-lb-link__label'];
         $item['#attributes']['class'][] = 'ws-lb-link';
       }
@@ -94,6 +95,7 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
             $link = &$build['block_categories'][$child]['links'][$link_id];
             $link['#attributes']['class'][] = 'ws-lb-link';
             $link['#title']['image']['#theme'] = 'wingsuit_lb_icon';
+            $link['#title']['image']['#icon_type'] = 'block';
             $link['#title']['label']['#markup'] = '<div class="ws-lb-link__label">' . $link['#title']['label']['#markup'] . '</div>';
             if (($key = array_search(
                 'layout-builder-browser-block-item',

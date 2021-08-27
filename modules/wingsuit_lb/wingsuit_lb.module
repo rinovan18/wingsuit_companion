@@ -88,14 +88,14 @@ function wingsuit_lb_form_alter(
  */
 function wingsuit_lb_preprocess_wingsuit_lb_icon(&$variables) {
   $uri = $variables['uri'];
-  $extension = pathinfo($uri, PATHINFO_EXTENSION);
-  if ($extension === 'svg') {
-    if (substr($uri, 0, 1) === '/') {#
-      $uri = substr($uri, 1);
-    }
-    if (file_exists($uri)) {
-      $variables['svg'] = $uri;
-    }
+  $type = $variables['icon_type'];
+  if ($uri === NULL) {
+    $filename = $type === 'block' ? 'block-empty-icon.svg' : 'section-empty-icon.svg';
+    $img_path = drupal_get_path(
+        'module',
+        'wingsuit_lb'
+      ) . '/images/' . $filename;
+    $variables['uri'] = file_url_transform_relative(file_create_url($img_path));
   }
 }
 
@@ -107,6 +107,7 @@ function wingsuit_lb_theme($existing, $type, $theme, $path) {
     'wingsuit_lb_icon' => [
       'variables' => [
         'uri' => NULL,
+        'icon_type' => NULL,
         'width' => NULL,
         'height' => NULL,
         'svg' => NULL,
