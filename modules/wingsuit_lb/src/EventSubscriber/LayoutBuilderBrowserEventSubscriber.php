@@ -143,8 +143,8 @@ class LayoutBuilderBrowserEventSubscriber implements EventSubscriberInterface {
       // Default library image.
       $img_path = drupal_get_path(
           'module',
-          'section_library'
-        ) . '/images/default.png';
+          'wingsuit_lb'
+        ) . '/images/section-empty-icon.svg';
       if ($fid = $section->get('image')->target_id) {
         $file = File::load($fid);
         $img_path = $file->getFileUri();
