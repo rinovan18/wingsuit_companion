@@ -1,0 +1,99 @@
+<?php
+
+use Drupal\ui_patterns_settings\UiPatternsSettings;
+use Drupal\ui_patterns\UiPatterns;
+
+/**
+ * Add UIPatterns settings as link widget options.
+ *
+ * @param array[] $plugins
+ *   Link attribute plugin definitions.
+ */
+function wingsuit_link_link_attributes_plugin_alter(array &$plugins) {
+  $pattern = UiPatterns::getManager()->getDefinition('button');
+  if ($pattern !== NULL) {
+    if (count($pattern->getVariantsAsOptions()) > 0) {
+      $options = ['' => t('- Use default -')];
+      $plugins['variant'] = [
+        'title' => t('Variant'),
+        'type' => 'select',
+        'options' => $options + $pattern->getVariantsAsOptions(),
+      ];
+    }
+    $settings = UiPatternsSettings::getPatternDefinitionSettings($pattern);
+    foreach ($settings as $setting) {
+      if (in_array($setting->getType(), ['select', 'radios'])) {
+        $options = ['' => t('- Use default -')];
+        $options += $setting->getOptions() ?? [];
+        $plugins[$setting->getName()] = [
+          'title' => $setting->getLabel(),
+          'type' => $setting->getType(),
+          'options' => $options,
+        ];
+      }
+      if (in_array($setting->getType(), ['boolean'])) {
+        $options = [
+          '' => t('- Use default -'),
+          1 => t('True'),
+          0 => t('False'),
+        ];
+        $plugins[$setting->getName()] = [
+          'title' => $setting->getLabel(),
+          'type' => 'select',
+          'options' => $options
+        ];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ui_pattern_settings_variant_alter().
+ *
+ * Replace variant with link variant options.
+ */
+function wingsuit_link_ui_pattern_settings_variant_alter(
+  &$variant,
+  array $context
+) {
+  if ($context['#pattern_id'] === 'button') {
+    $pattern_context = $context['#pattern_context'];
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $pattern_context->getProperty('item');
+    if ($link !== NULL) {
+      $values = $link->get('options')->getValue();
+      if (!empty($values['attributes']['variant'])) {
+        $variant = $values['attributes']['variant'];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ui_pattern_settings_settings_alter().
+ *
+ * Replace settings with link options.
+ */
+function wingsuit_link_ui_pattern_settings_settings_alter(
+  array &$settings,
+  array $context
+) {
+  if ($context['#pattern_id'] === 'button') {
+    /** @var \Drupal\ui_patterns\Element\PatternContext $pattern_context */
+    $pattern_context = $context['#pattern_context'];
+    /** @var \Drupal\link\Plugin\Field\FieldType\LinkItem $link */
+    $link = $pattern_context->getProperty('item');
+    if ($link !== NULL) {
+      $options = $link->get('options');
+      $values = $options->getValue();
+      $settings['url'] = $link->getUrl()->toString();
+      if (isset($values['attributes'])) {
+        foreach ($values['attributes'] as $name => $value) {
+          if (!empty($value)) {
+            $settings[$name] = $value;
+          }
+        }
+      }
+    }
+  }
+}

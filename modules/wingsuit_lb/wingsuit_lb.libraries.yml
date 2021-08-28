@@ -2,7 +2,9 @@ core:
   version: VERSION
   css:
     component:
-      css/wingsuit_lb.core.css: {}
+      css/wingsuit-lb.core.css: {}
+      css/wingsuit-lb.lb.css: {}
+      css/wingsuit-lb.link.css: {}
   dependencies:
     - core/jquery
     - core/jquery.once

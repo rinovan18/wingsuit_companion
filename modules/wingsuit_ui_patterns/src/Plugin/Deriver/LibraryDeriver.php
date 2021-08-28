@@ -202,7 +202,7 @@ class LibraryDeriver extends AbstractYamlPatternsDeriver {
    */
   protected function getDirectories() {
     $dist_path = $this->config->get('dist_path');
-    $directories['wingsuit'] = $dist_path;
+    $directories['wingsuit'] = realpath($dist_path);
     return $directories;
   }
 

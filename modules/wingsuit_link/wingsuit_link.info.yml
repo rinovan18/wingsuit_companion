@@ -1,0 +1,9 @@
+name: 'Wingsuit Link'
+core: 8.x
+core_version_requirement: '^8 || ^9'
+type: module
+description: 'UI Patterns Settings Link Widget integration.'
+package: Wingsuit
+dependencies:
+  - link_attributes:link_attributes
+  - ui_patterns_settings:ui_patterns_settings

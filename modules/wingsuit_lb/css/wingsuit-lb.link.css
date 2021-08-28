@@ -1,45 +1,36 @@
-.ws-lb .glb-claro-details__wrapper,
-.ws-lb-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.ws-lb a {
+.ws-lb-link {
   width: 100%;
   position: relative;
   padding-bottom: 56%;
   border: 1px solid var(--colorGinTableBorder);
   border-radius: 8px;
   overflow: hidden;
+  background-color: #F3F4F6;
 }
 
-.ws-lb a:hover {
-  background: none !important;
+.ws-lb-link:hover {
   box-shadow: 4px 4px 10px var(--colorGinLayer2Background);
 }
 
-.ws-lb a > div{
+.ws-lb-link__label {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  text-align: center;
-  font-weight: bold;
-  background: var(--colorGinAppBackground);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  text-align: left;
+  font-weight: 500;
+  background-color: #ffffff;
+  padding: 12px;
+  box-shadow: 0px -15px 20px rgba(243, 244, 246, 0.9);
 }
 
-.ws-lb a img {
+.ws-lb-link svg, .ws-lb-link img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 20px);
   left: 50%;
+  padding: 10px 40px;
   transform: translate(-50%, -50%);
 }
-
