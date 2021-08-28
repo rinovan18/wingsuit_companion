@@ -86,6 +86,7 @@ function wingsuit_link_ui_pattern_settings_settings_alter(
     if ($link !== NULL) {
       $options = $link->get('options');
       $values = $options->getValue();
+      $settings['url'] = $link->getUrl()->toString();
       if (isset($values['attributes'])) {
         foreach ($values['attributes'] as $name => $value) {
           if (!empty($value)) {
