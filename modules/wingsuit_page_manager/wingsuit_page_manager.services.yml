@@ -1,0 +1,6 @@
+services:
+  wingsuit_page_manager.theme_negotiator:
+    class: Drupal\wingsuit_page_manager\Theme\PageManagerThemeNegotiator
+    arguments: ['@config.factory']
+    tags:
+      - { name: theme_negotiator, priority: 41 }
