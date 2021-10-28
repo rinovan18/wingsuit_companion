@@ -11,7 +11,7 @@
 function wingsuit_page_manager_gin_lb_show_toolbar_alter(&$gin_lb_show_toolbar){
   $route_match = \Drupal::routeMatch();
   $route_name = $route_match->getRouteName();
-  if ($route_name === 'entity.page.add_step_form' && $route_match->getParameter('step') === 'layout_builder') {
+  if (($route_name === 'entity.page.add_step_form' || $route_name === 'entity.page.edit_form') && str_ends_with($route_match->getParameter('step'), 'layout_builder')) {
     $gin_lb_show_toolbar = FALSE;
   }
 }
@@ -22,7 +22,7 @@ function wingsuit_page_manager_gin_lb_show_toolbar_alter(&$gin_lb_show_toolbar){
 function wingsuit_page_manager_gin_lb_is_layout_builder_route_alter(&$gin_lb_is_layout_builder_route){
   $route_match = \Drupal::routeMatch();
   $route_name = $route_match->getRouteName();
-  if ($route_name === 'entity.page.add_step_form' && $route_match->getParameter('step') === 'layout_builder') {
+  if (($route_name === 'entity.page.add_step_form' || $route_name === 'entity.page.edit_form') && str_ends_with($route_match->getParameter('step'), 'layout_builder')) {
     $gin_lb_is_layout_builder_route = TRUE;
   }
 }
