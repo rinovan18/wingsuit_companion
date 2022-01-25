@@ -1,7 +1,11 @@
-.layout-builder__region.flex > .layout-builder-block {
+.layout-builder__region.flex:not(.justify-center) > .layout-builder-block {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.layout-builder__section .layout-builder-block + .layout-builder-block {
+  margin-top: 40px;
 }
 
 .layout-builder__link--remove {
