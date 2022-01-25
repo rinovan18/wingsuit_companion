@@ -8,3 +8,4 @@ dependencies:
   - layout_builder_browser:layout_builder_browser
   - field_group:field_group
   - gin_lb:gin_lb
+  - section_library:section_library

@@ -1,0 +1,8 @@
+name: livit_page_manager
+type: module
+description: 'Provides theme negitator for page_manager.'
+package: livit
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - drupal:text

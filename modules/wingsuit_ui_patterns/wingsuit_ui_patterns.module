@@ -20,7 +20,7 @@ function wingsuit_ui_patterns_plugin_filter_layout_alter(array &$definitions, ar
    * @var \Drupal\Core\Layout\LayoutDefinition $definition
    */
   foreach ($definitions as $key => $definition) {
-    if ($definition->getProvider() !== 'wingsuit' && $use_only_wingsuit_layouts === TRUE) {
+    if ($definition->getProvider() !== 'wingsuit_companion' && $use_only_wingsuit_layouts === TRUE) {
       unset($definitions[$key]);
     }
   }

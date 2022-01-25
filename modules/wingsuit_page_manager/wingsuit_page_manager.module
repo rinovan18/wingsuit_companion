@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Contain wingsuit page_manager hooks.
+ */
+
+/**
+ * Implments hook_gin_lb_disable_toolbar_alter().
+ */
+function wingsuit_page_manager_gin_lb_show_toolbar_alter(&$gin_lb_show_toolbar){
+  $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
+  if (($route_name === 'entity.page.add_step_form' || $route_name === 'entity.page.edit_form') && str_ends_with($route_match->getParameter('step'), 'layout_builder')) {
+    $gin_lb_show_toolbar = FALSE;
+  }
+}
+
+/**
+ * Implments hook_gin_lb_is_layout_builder_route_alter().
+ */
+function wingsuit_page_manager_gin_lb_is_layout_builder_route_alter(&$gin_lb_is_layout_builder_route){
+  $route_match = \Drupal::routeMatch();
+  $route_name = $route_match->getRouteName();
+  if (($route_name === 'entity.page.add_step_form' || $route_name === 'entity.page.edit_form') && str_ends_with($route_match->getParameter('step'), 'layout_builder')) {
+    $gin_lb_is_layout_builder_route = TRUE;
+  }
+}
