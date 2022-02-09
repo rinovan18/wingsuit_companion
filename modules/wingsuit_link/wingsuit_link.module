@@ -3,6 +3,17 @@
 use Drupal\ui_patterns_settings\UiPatternsSettings;
 use Drupal\ui_patterns\UiPatterns;
 
+function wingsuit_link_form_wingsuit_companion_config_form_alter(&$form) {
+  $config = \Drupal::configFactory()->get('wingsuit_companion.config');
+  $form['auto_fill_link_url'] = [
+    '#weight' => 25,
+    '#type' => 'checkbox',
+    '#title' => t('Auto fill "url" setting of your button pattern.'),
+    '#description' => t('Wingsuit will fill the "url" setting of your button pattern with the related link url of your link field .'),
+    '#default_value' => $config->get('auto_fill_link_url'),
+  ];
+}
+
 /**
  * Add UIPatterns settings as link widget options.
  *
@@ -86,7 +97,10 @@ function wingsuit_link_ui_pattern_settings_settings_alter(
     if ($link !== NULL) {
       $options = $link->get('options');
       $values = $options->getValue();
-      $settings['url'] = $link->getUrl()->toString();
+      $config = \Drupal::configFactory()->get('wingsuit_companion.config');
+      if ($config->get('auto_fill_link_url')) {
+        $settings['url'] = $link->getUrl()->toString();
+      }
       if (isset($values['attributes'])) {
         foreach ($values['attributes'] as $name => $value) {
           if (!empty($value)) {

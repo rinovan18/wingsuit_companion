@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Contains ui_patterns.install.
+ */
+
+/**
+ * Prefill auto_fill_link_url setting.
+ */
+function wingsuit_link_update_8201() {
+  \Drupal::configFactory()->getEditable('wingsuit_companion.config')->set('auto_fill_link_url', TRUE)->save();
+}

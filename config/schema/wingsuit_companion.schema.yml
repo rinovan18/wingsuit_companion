@@ -8,3 +8,6 @@ wingsuit_companion.config:
     only_own_layout:
       type: boolean
       label: 'Use only Wingsuit patterns'
+    auto_fill_link_url:
+      type: boolean
+      label: 'Auto fill url setting with link url.'
