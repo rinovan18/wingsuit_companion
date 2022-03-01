@@ -168,23 +168,19 @@ class LibraryDeriver extends AbstractYamlPatternsDeriver {
   public function getPatterns() {
     $patterns = [];
     foreach ($this->getDirectories() as $provider => $directory) {
-      try {
-        foreach ($this->fileScanDirectory($directory) as $file_path => $file) {
-          $host_extension = $this->getHostExtension($file_path);
-          if ($host_extension == FALSE || $host_extension == $provider) {
-            $content = file_get_contents($file_path);
-            foreach (Yaml::decode($content) as $id => $definition) {
-              $definition['id'] = $id;
-              $definition['base path'] = dirname($file_path);
-              $definition['file name'] = basename($file_path);
-              $definition['provider'] = $provider;
-              $this->removeWingsuitExtensions($definition);
-              $patterns[] = $this->getPatternDefinition($definition);
-            }
+      foreach ($this->fileScanDirectory($directory) as $file_path => $file) {
+        $host_extension = $this->getHostExtension($file_path);
+        if ($host_extension == FALSE || $host_extension == $provider) {
+          $content = file_get_contents($file_path);
+          foreach (Yaml::decode($content) as $id => $definition) {
+            $definition['id'] = $id;
+            $definition['base path'] = dirname($file_path);
+            $definition['file name'] = basename($file_path);
+            $definition['provider'] = $provider;
+            $this->removeWingsuitExtensions($definition);
+            $patterns[] = $this->getPatternDefinition($definition);
           }
         }
-      } catch (\Throwable $ex) {
-        \Drupal::messenger()->addError("Error while parsing scaning directory " . $directory . ' ' . $ex->getMessage());
       }
     }
 
