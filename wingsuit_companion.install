@@ -50,6 +50,8 @@ function _wingsuit_companion_canonicalize($path) {
 function wingsuit_companion_install() {
   $config_factory = \Drupal::configFactory();
   $config = $config_factory->getEditable('wingsuit_companion.config');
-  $config->set('dist_path', 'themes/custom/wingsuit/dist/app-drupal');
-  $config->save(TRUE);
+  if (empty($config->get('dist_path'))) {
+    $config->set('dist_path', 'themes/custom/wingsuit/dist/app-drupal');
+    $config->save(TRUE);
+  }
 }
