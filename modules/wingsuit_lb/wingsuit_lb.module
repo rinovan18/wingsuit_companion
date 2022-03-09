@@ -71,6 +71,9 @@ function wingsuit_lb_form_alter(
     $form['actions']['layout_builder_save_and_edit_layout']['#value'] = t(
       'Save'
     );
+    if (isset($form['actions']['move_sections'])) {
+      $form['actions']['move_sections']['#attributes']['class'][] = 'glb-button ws-lb-button';
+    }
   }
   if (
     in_array($form_id, [
