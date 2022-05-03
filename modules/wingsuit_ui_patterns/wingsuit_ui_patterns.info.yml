@@ -7,6 +7,6 @@ dependencies:
   - wingsuit_companion:wingsuit_companion
   - ui_patterns:ui_patterns
   - ui_patterns:ui_patterns_layouts
-  - ui_patterns_settings:ui_patterns_settings (>=8.x-2.x)
+  - ui_patterns_settings:ui_patterns_settings (>=2.0)
   - ui_patterns_extends:ui_patterns_extends
   - components:components
