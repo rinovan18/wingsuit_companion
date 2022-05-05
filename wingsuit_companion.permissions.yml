@@ -1,0 +1,3 @@
+administer wingsuit configuration:
+  title: 'Administer Wingsuit configuration'
+  restrict access: true
